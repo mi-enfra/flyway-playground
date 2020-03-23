@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+source ./.env
+export DB_USER \
+    DB_PASS
+
+docker run --rm \
+    -v $PWD/migrations:/flyway/sql \
+    flyway/flyway:6.3 \
+        -url=jdbc:mysql://mysql \
+        -user=$DB_USER \
+        -password=$DB_PASS \
+        migrate
